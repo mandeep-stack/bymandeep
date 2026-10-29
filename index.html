@@ -470,7 +470,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 (function(){
   var SHEET_URL  = 'https://script.google.com/macros/s/AKfycbxFPiDq1b2GQKQbbOe0qa1LHHesMmbsLOCNg39QZ40OBA05EuM0rkdAprLvtmdksfA/exec';
   var PABBLY_URL = 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NjYwNTZkMDYzNjA0M2Q1MjZlNTUzMyI_3D_pc/IjU3NjcwNTY5MDYzMTA0MzE1MjZlNTUzMDUxMzUi_pc';
-  var CAL        = 'https://cal.eu/adcomp/adcomp-discovery-call';
+  var CAL        = 'https://calendly.com/mandeepsingh97-v33k/30min';
   var VARIANT    = 'pages';   // identifies this hosting version in every lead
   var TOTAL      = 7;
   var cur        = 0;
@@ -541,8 +541,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var p = new URLSearchParams();
         if(ans.name)  p.set('name',  ans.name);
         if(ans.email) p.set('email', ans.email);
-        p.set('embed', '1');
-        p.set('hideBranding', '1');
+        p.set('embed_domain', window.location.hostname);
+        p.set('embed_type', 'Inline');
+        p.set('hide_gdpr_banner', '1');
         iframe.src = CAL + '?' + p.toString();
       }
     }
@@ -734,6 +735,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       d === 'booking_confirmed' ||
       d.type === 'booking_confirmed' ||
       d.type === 'cal:booking_confirmed' ||
+      d.event === 'calendly.event_scheduled' ||
       d.type === '__cal__booking_successful' ||
       (typeof d === 'string' && d.indexOf('booking') > -1 && d.indexOf('confirm') > -1)
     );
