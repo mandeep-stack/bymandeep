@@ -16,16 +16,35 @@
 <link rel="preconnect" href="https://play.gumlet.io">
 
 <!-- ============================================================
-     TRACKING: Meta Pixel and server-side CAPI PageView intentionally
-     removed on this domain (bymandeep.com). Re-add when ready.
+     TRACKING: Meta Pixel 1824324015374445, browser events only.
+     No server-side / CAPI calls on this domain.
+     Events fired from this page:
+       PageView                 on load (here, in <head>)
+       quiz_button_click        custom, same moment as the dataLayer push
+       Lead                     same moment as form_submission_vsl
+       Schedule                 when Calendly reports the booking
      ============================================================ -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1824324015374445');
+fbq('track', 'PageView');
+// Safe wrapper so a blocked pixel never breaks the funnel
+window.metaTrack = function(kind, name, params){
+  try { if (window.fbq) window.fbq(kind, name, params || {}); } catch (e) {}
+};
+</script>
 
 <!-- ============================================================
      TRACKING: dataLayer kept intact. Events pushed by this page:
        - quiz_button_click   (variant: 'pages')
        - form_submission_vsl (variant: 'pages')
      GTM loader is disabled for now because container GTM-W95RB6L
-     contains the Meta tags. To switch tracking back on, uncomment it.
+     contains Meta tags for the other pixel. If you re-enable it, remove
+     the direct metaTrack() calls or the events will be counted twice.
      ============================================================ -->
 <script>window.dataLayer = window.dataLayer || [];</script>
 <!--
@@ -670,6 +689,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'form_submission_vsl', variant: VARIANT });
+    window.metaTrack && window.metaTrack('track', 'Lead');
 
     fetch(SHEET_URL, {
       method:'POST', mode:'no-cors',
@@ -739,9 +759,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       d.type === '__cal__booking_successful' ||
       (typeof d === 'string' && d.indexOf('booking') > -1 && d.indexOf('confirm') > -1)
     );
-    if(isBooked){
+    if(isBooked && !window.__scheduleSent){
+      window.__scheduleSent = true;
+      window.metaTrack && window.metaTrack('track', 'Schedule');
       go('booked');
-      window.location.href = 'https://adcomp.xyz/cal-eu-confirmation/';
+      // short delay so the browser pixel request is sent before the redirect
+      setTimeout(function(){
+        window.location.href = 'https://adcomp.xyz/cal-eu-confirmation/';
+      }, 500);
     }
   });
 
@@ -776,6 +801,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.dispatchEvent(new Event('resize'));
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'quiz_button_click', variant: 'pages' });
+    window.metaTrack && window.metaTrack('trackCustom', 'quiz_button_click');
     requestAnimationFrame(function(){
       quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
