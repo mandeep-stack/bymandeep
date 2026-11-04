@@ -41,22 +41,36 @@ h1{margin:0;font-size:clamp(26px,4.4vw,40px);line-height:1.12;font-weight:800;le
 }
 </style>
 
-<!-- Meta Pixel 1824324015374445, browser events only. -->
+<!-- GA4: set GA4_ID in PAGE_CONFIG. Fires pixel_session_payment_made once per payment. No Meta pixel on this page. -->
 <script>
 window.PAGE_CONFIG = {
-  PIXEL_ID: '1824324015374445',
+  GA4_ID: '',   // e.g. 'G-XXXXXXXXXX'
   CALENDLY_URL: 'https://calendly.com/mandeepsingh97-v33k/30min'
 };
 (function(){
-  var id = window.PAGE_CONFIG.PIXEL_ID;
+  var id = window.PAGE_CONFIG.GA4_ID;
   if (!id) return;
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src='https://connect.facebook.net/en_US/fbevents.js';s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script');
-  fbq('init', id);
-  fbq('track', 'PageView');
+  var g = document.createElement('script');
+  g.async = true;
+  g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+  document.head.appendChild(g);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', id);
+
+  // Razorpay adds the payment id to the redirect URL; use it so GA4 can dedupe
+  var q = new URLSearchParams(location.search);
+  var txn = q.get('razorpay_payment_id') || '';
+  var key = 'psp_sent_' + (txn || 'page');
+  var already = false;
+  try { already = !!sessionStorage.getItem(key); } catch (e) {}
+  if (!already) {
+    var params = { value: 99, currency: 'INR' };
+    if (txn) params.transaction_id = txn;
+    gtag('event', 'pixel_session_payment_made', params);
+    try { sessionStorage.setItem(key, '1'); } catch (e) {}
+  }
 })();
 </script>
 </head>
@@ -100,7 +114,6 @@ window.PAGE_CONFIG = {
     if (!d || typeof d !== 'object') return;
     if (d.event === 'calendly.event_scheduled' && !sent) {
       sent = true;
-      try { if (window.fbq) window.fbq('track', 'Schedule'); } catch (err) {}
       document.getElementById('cal-frame').style.display = 'none';
       document.getElementById('done').classList.add('show');
     }
