@@ -63,13 +63,21 @@ window.PAGE_CONFIG = {
   var q = new URLSearchParams(location.search);
   var txn = q.get('razorpay_payment_id') || '';
   var key = 'psp_sent_' + (txn || 'page');
-  var already = false;
-  try { already = !!sessionStorage.getItem(key); } catch (e) {}
-  if (!already) {
+  // localStorage survives refreshes, new tabs and closed browsers; sessionStorage is the fallback
+  function seen(){
+    try { if (localStorage.getItem(key)) return true; } catch (e) {}
+    try { if (sessionStorage.getItem(key)) return true; } catch (e) {}
+    return false;
+  }
+  function mark(){
+    try { localStorage.setItem(key, String(Date.now())); } catch (e) {}
+    try { sessionStorage.setItem(key, '1'); } catch (e) {}
+  }
+  if (!seen()) {
+    mark(); // mark first so a fast refresh cannot send it twice
     var params = { value: 99, currency: 'INR' };
     if (txn) params.transaction_id = txn;
     gtag('event', 'pixel_session_payment_made', params);
-    try { sessionStorage.setItem(key, '1'); } catch (e) {}
   }
 })();
 </script>
