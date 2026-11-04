@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case Studies | AdComp Digital Studio</title>
+<meta name="description" content="Watch real website speed case studies from AdComp Digital Studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+.aw-cs{
+  --aw-bg:#FAF8F4; --aw-ink:#14120F; --aw-mute:#6B665E; --aw-accent:#D9481C;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--aw-ink); background:var(--aw-bg);
+  padding:28px 0 calc(96px + env(safe-area-inset-bottom)); box-sizing:border-box;
+  -webkit-text-size-adjust:100%;
+}
+.aw-cs *{box-sizing:border-box}
+.aw-wrap{max-width:860px;margin:0 auto}
+.aw-top{padding:0 16px;margin-bottom:22px}
+.aw-h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(28px,7vw,48px);line-height:1.1;letter-spacing:-.02em;margin:0 0 8px}
+.aw-sub{margin:0;font-size:15px;color:var(--aw-mute)}
+
+.aw-list{display:flex;flex-direction:column;gap:14px}
+.aw-video{position:relative;width:100%;aspect-ratio:16/9;background:#14120F;overflow:hidden;scroll-margin-top:12px;transition:box-shadow .4s}
+.aw-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.aw-video.aw-hl{box-shadow:0 0 0 3px var(--aw-accent)}
+.aw-poster{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;margin:0;background:#14120F;cursor:pointer;display:block}
+.aw-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.aw-play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--aw-accent);box-shadow:0 6px 24px rgba(0,0,0,.35);transition:transform .2s}
+.aw-play:after{content:"";position:absolute;left:27px;top:20px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent #fff}
+.aw-poster:hover .aw-play{transform:scale(1.08)}
+.aw-poster:focus-visible{outline:3px solid var(--aw-accent);outline-offset:-3px}
+.aw-soon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8d877c;font-size:15px}
+@media (min-width:700px){
+  .aw-cs{padding-top:64px}
+  .aw-top{padding:0 20px;margin-bottom:32px}
+  .aw-list{gap:24px;padding:0 20px}
+  .aw-video{border-radius:16px}
+}
+
+/* CTA: sticky bar on mobile, centred block on desktop */
+.aw-cta{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(250,248,244,.96);border-top:1px solid #E7E2D8;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.aw-btn{display:block;width:100%;text-align:center;background:var(--aw-accent);color:#fff;text-decoration:none;font-weight:600;font-size:16px;line-height:1;padding:16px 20px;border-radius:12px;min-height:48px}
+.aw-btn:active{filter:brightness(.9)}
+@media (min-width:700px){
+  .aw-cta{position:static;background:none;border:0;padding:40px 20px 0;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .aw-btn{display:inline-block;width:auto;padding:16px 32px}
+  .aw-cta{text-align:center}
+}
+@media (prefers-reduced-motion:reduce){.aw-cs *{transition:none!important}}
+</style>
+<style>
+.aw-note{padding:40px 16px;text-align:center;color:var(--aw-mute);font-size:15px}
+</style>
+</head>
+<body style="margin:0">
+
+<section class="aw-cs" id="aw-cs">
+  <div class="aw-wrap">
+    <div class="aw-top">
+      <h1 class="aw-h1">Case studies</h1>
+      <p class="aw-sub">Real websites. Real results. Watch.</p>
+    </div>
+    <div class="aw-list" id="aw-list"></div>
+    <div class="aw-cta">
+      <a class="aw-btn" id="aw-cta" href="#">Book Your Pixel Session - ₹99</a>
+    </div>
+  </div>
+</section>
+
+<!-- No Meta pixel on this page. Events (case_view, case_video_play, case_video_progress,
+     case_cta_click) go to GA4 using ga4Id from videos.json. -->
+<script>
+(function(){
+  /* Everything you edit lives in videos.json (library ID, CDN host, button link, video list). */
+  var listEl = document.getElementById('aw-list');
+  var dl = (window.dataLayer = window.dataLayer || []);
+  var qs = new URLSearchParams(location.search);
+  var SRC = {
+    utm_source: qs.get('utm_source') || '',
+    utm_medium: qs.get('utm_medium') || '',
+    utm_campaign: qs.get('utm_campaign') || ''
+  };
+  function push(o){
+    for (var k in SRC) o[k] = SRC[k];
+    dl.push(o);
+    if (window.gtag && o.event) {            // forward to GA4
+      var p = {}; for (var k2 in o) if (k2 !== 'event') p[k2] = o[k2];
+      window.gtag('event', o.event, p);
+    }
+  }
+  function esc(s){ var d=document.createElement('div'); d.textContent = s==null?'':String(s); return d.innerHTML; }
+  function vid(g){ return 'v-' + String(g).slice(0,8); }
+  function isPlaceholder(v){ return !v || /^(YOUR_|PASTE_|NEXT_)/.test(String(v)); }
+  /* each entry can be: a bare video ID (GUID), "GUID|thumbnail_file.jpg", or a pasted Thumbnail URL */
+  function parse(e){
+    e = String(e).trim();
+    var m = e.match(/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\/([^\/?#|]+)/i);
+    if(m) return { g:m[1], f:m[2] };
+    var p = e.split('|');
+    return { g:p[0], f:p[1] || 'thumbnail.jpg' };
+  }
+
+  fetch('/pixel-conditioning-case-studies/videos.json', { cache: 'no-cache' })
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(init)
+    .catch(function(){ listEl.innerHTML = '<div class="aw-note">Videos could not be loaded. Please refresh.</div>'; });
+
+  function init(cfg){
+    var CONFIG = {
+      bunnyLibraryId: String(cfg.libraryId || ''),
+      cdnHost: String(cfg.cdnHost || ''),
+      ctaUrl: String(cfg.ctaUrl || '')
+    };
+    var VIDEOS = Array.isArray(cfg.videos) ? cfg.videos.filter(function(v){ return String(v).trim() && !isPlaceholder(parse(v).g); }) : [];
+    var GA4 = String(cfg.ga4Id || '');
+    if(!isPlaceholder(GA4)){
+      var gs = document.createElement('script');
+      gs.async = true;
+      gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4);
+      document.head.appendChild(gs);
+      window.gtag = function(){ dl.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA4);
+    }
+    var libOk = !isPlaceholder(CONFIG.bunnyLibraryId);
+    var cdnOk = !isPlaceholder(CONFIG.cdnHost);
+
+    /* ---------------- RENDER (thumbnail first, player loads on click) ---------------- */
+    if(!VIDEOS.length){
+      listEl.innerHTML = '<div class="aw-note">Case studies coming soon.</div>';
+    } else {
+      listEl.innerHTML = VIDEOS.map(function(e, i){
+        var P = parse(e), g = P.g;
+        var inner = libOk
+          ? '<button type="button" class="aw-poster" data-g="'+esc(g)+'" data-vid="'+esc(vid(g))+'" aria-label="Play case study video '+(i+1)+'">' +
+            (cdnOk ? '<img src="https://'+esc(CONFIG.cdnHost)+'/'+encodeURIComponent(g)+'/'+esc(P.f)+'" onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.replace(/\\/[^\\/]+$/,\'/thumbnail.jpg\')}else{this.remove()}" width="1280" height="720" alt="" decoding="async" ' + (i === 0 ? 'fetchpriority="high"' : 'loading="lazy"') + '>' : '') +
+            '<span class="aw-play"></span></button>'
+          : '<div class="aw-soon">Video coming soon</div>';
+        return '<div class="aw-video" id="'+esc(vid(g))+'">'+inner+'</div>';
+      }).join('');
+    }
+
+    /* ---------------- VIDEO TRACKING (Bunny player.js, loaded only after a click) ---------------- */
+    function loadPlayerJs(cb){
+      if(window.playerjs) return cb();
+      var s = document.createElement('script');
+      s.src = 'https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js';
+      s.onload = cb; document.head.appendChild(s);
+    }
+    function track(f, id){
+      var fired = {}, played = false;
+      var p = new playerjs.Player(f);
+      p.on('ready', function(){
+        p.on('play', function(){ if(!played){ played = true; push({ event:'case_video_play', case_id:id }); } });
+        p.on('timeupdate', function(d){
+          if(!d || !d.duration) return;
+          var pct = (d.seconds / d.duration) * 100;
+          [25,50,75].forEach(function(m){
+            if(pct >= m && !fired[m]){ fired[m]=1; push({ event:'case_video_progress', case_id:id, percent:m }); }
+          });
+        });
+        p.on('ended', function(){ if(!fired[100]){ fired[100]=1; push({ event:'case_video_progress', case_id:id, percent:100 }); } });
+      });
+    }
+    function activate(btn){
+      var g = btn.getAttribute('data-g'), id = btn.getAttribute('data-vid');
+      var f = document.createElement('iframe');
+      f.src = 'https://iframe.mediadelivery.net/embed/'+encodeURIComponent(CONFIG.bunnyLibraryId)+'/'+encodeURIComponent(g)+'?autoplay=true&preload=true&responsive=true';
+      f.title = btn.getAttribute('aria-label').replace('Play ','');
+      f.setAttribute('allow','accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture');
+      f.setAttribute('allowfullscreen','');
+      f.setAttribute('data-vid', id);
+      btn.parentNode.replaceChild(f, btn);
+      loadPlayerJs(function(){ track(f, id); });
+    }
+    listEl.addEventListener('click', function(e){
+      var b = e.target.closest ? e.target.closest('.aw-poster') : null;
+      if(b) activate(b);
+    });
+
+    /* ---------------- VIEW + CTA TRACKING, DEEP LINKS ---------------- */
+    if('IntersectionObserver' in window){
+      var seen = {};
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting && !seen[en.target.id]){ seen[en.target.id]=1; push({ event:'case_view', case_id:en.target.id }); }
+        });
+      }, { threshold:.5 });
+      listEl.querySelectorAll('.aw-video').forEach(function(el){ io.observe(el); });
+    }
+
+    var cta = document.getElementById('aw-cta');
+    if(!isPlaceholder(CONFIG.ctaUrl)) cta.href = CONFIG.ctaUrl;
+    cta.addEventListener('click', function(){ push({ event:'case_cta_click', case_id:'footer' }); });
+
+    function goToHash(){
+      var id = decodeURIComponent((location.hash||'').slice(1));
+      var el = id && document.getElementById(id);
+      if(el && el.classList.contains('aw-video')){
+        el.scrollIntoView({ behavior:'smooth', block:'start' });
+        el.classList.add('aw-hl');
+        setTimeout(function(){ el.classList.remove('aw-hl'); }, 2600);
+      }
+    }
+    setTimeout(goToHash, 150);
+    window.addEventListener('hashchange', goToHash);
+  }
+})();
+</script>
+</body>
+</html>
