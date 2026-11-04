@@ -3,811 +3,301 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why did growth stop? | AdComp</title>
-<meta name="description" content="A free breakdown for D2C brands spending ₹3L+/month on ads.">
-<meta name="robots" content="noindex, nofollow">
-
-<!-- Fonts (same as WordPress version) -->
+<title>Pixel Clarity Session | AdComp Digital Studio</title>
+<meta name="description" content="A 20-minute screen-share to find out why Meta and your store report different sales, and where your pixel data is leaking.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#4F46E5;
+  --accent-soft:#EEEDFD;
+  --bg:#F8F8FB;
+  --ink:#111118;
+  --muted:#5B5B6B;
+  --body:#4B4B5A;
+  --line:#E3E3EC;
+  --line-soft:#ECECF3;
+  --good:#0F766E;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;padding-bottom:84px;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
 
-<!-- Preconnect to the video host so the player loads faster -->
-<link rel="preconnect" href="https://play.gumlet.io">
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 40px}
+.brand{padding-top:20px;text-align:center;font-size:15px;font-weight:800;letter-spacing:-.01em}
+.brand span{font-weight:600;color:var(--muted)}
 
-<!-- ============================================================
-     TRACKING: Meta Pixel 1824324015374445, browser events only.
-     No server-side / CAPI calls on this domain.
-     Events fired from this page:
-       PageView                 on load (here, in <head>)
-       quiz_button_click        custom, same moment as the dataLayer push
-       Lead                     same moment as form_submission_vsl
-       Schedule                 when Calendly reports the booking
-     ============================================================ -->
+.hero{max-width:820px;margin:0 auto;padding-top:32px;text-align:center;display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--accent)}
+h1{margin:0;font-size:clamp(32px,5.2vw,54px);line-height:1.08;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+.sub{margin:0 auto;max-width:620px;font-size:clamp(17px,2vw,20px);line-height:1.5;color:var(--body)}
+.sub strong{color:var(--ink)}
+
+.video{margin:24px auto 0;max-width:820px;position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px -16px rgba(40,30,120,.4)}
+.video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.slide-title{padding:clamp(14px,2.4vw,28px) clamp(14px,2.4vw,28px) 0;font-size:clamp(14px,1.8vw,20px);font-weight:700}
+.panels{margin:clamp(10px,1.6vw,18px) clamp(14px,2.4vw,28px) 0;display:flex;gap:clamp(8px,1.4vw,16px)}
+.panel{flex:1;border:1px solid var(--line);border-radius:10px;padding:clamp(8px,1.4vw,16px);display:flex;flex-direction:column;gap:clamp(6px,1vw,10px)}
+.panel em{font-style:normal;font-size:clamp(10px,1.2vw,13px);font-weight:700;color:var(--muted)}
+.panel i{display:block;height:clamp(8px,1.2vw,14px);border-radius:7px;background:#E7E7EF}
+.panel i:first-of-type{background:#CFCFE0}
+.play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px -6px rgba(79,70,229,.6)}
+.chip{position:absolute;left:14px;bottom:14px;padding:5px 10px;border-radius:999px;background:rgba(17,17,24,.82);color:#fff;font-size:12px;font-weight:600}
+
+.cta-block{margin:20px auto 0;max-width:460px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;border-radius:999px;background:var(--accent);color:#fff;font-size:19px;font-weight:800;box-shadow:0 12px 24px -12px rgba(79,70,229,.7);transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 16px 28px -12px rgba(79,70,229,.8)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.note{font-size:13.5px;color:var(--muted);text-align:center}
+
+.cols{margin-top:48px;display:grid;grid-template-columns:minmax(0,1fr);gap:48px}
+.right{display:flex;flex-direction:column;gap:48px}
+section{display:flex;flex-direction:column;gap:14px}
+h2{margin:0;font-size:clamp(22px,2.4vw,28px);line-height:1.2;font-weight:800;letter-spacing:-.015em}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.gets{padding:4px 16px;display:flex;flex-direction:column}
+.get{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.get:last-child{border-bottom:0}
+.ico{flex:none;width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center}
+.get b{display:block;font-size:16px;font-weight:700;margin-bottom:3px}
+.get p{margin:0;font-size:14px;line-height:1.45;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step div{padding-top:3px}
+.step b{display:block;font-size:16px;font-weight:700;margin-bottom:2px}
+.step p{margin:0;font-size:14px;line-height:1.45;color:var(--muted)}
+.fit{padding:18px 16px;display:flex;flex-direction:column;gap:18px}
+.fit h3{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.12em}
+.fit h3.yes{color:var(--good)}
+.fit h3.no{color:var(--muted)}
+.fit ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fit li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.4}
+.fit li svg{flex:none;margin-top:1px}
+.fit .yes-list svg{color:var(--good)}
+.fit .no-list{color:var(--body)}
+.fit .no-list svg{color:#8A8A9B}
+.fit hr{border:0;height:1px;background:var(--line-soft);margin:0}
+
+.bottom{max-width:560px;margin:48px auto 0}
+.refund{display:flex;gap:14px;align-items:flex-start;background:var(--accent-soft);border-radius:16px;padding:18px 16px}
+.refund svg{flex:none;color:var(--accent)}
+.refund b{display:block;font-size:16px;font-weight:800;margin-bottom:4px}
+.refund p{margin:0;font-size:14px;line-height:1.45;color:var(--body)}
+.bottom .cta-block{margin-top:28px;max-width:none}
+footer{margin-top:36px;text-align:center;font-size:12.5px;color:#6B6B7B}
+
+/* Sticky bar: shown once the top button has scrolled out of view */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#fff;border-top:1px solid var(--line);padding:12px 20px calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:center;transform:translateY(100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s}
+.sticky.show{transform:none;visibility:visible;transition:transform .25s ease}
+.sticky-in{width:100%;max-width:520px;display:flex;align-items:center;gap:14px}
+.price{line-height:1.15}
+.price b{display:block;font-size:22px;font-weight:800}
+.price span{font-size:12px;color:var(--muted)}
+.sticky .btn{flex:1;min-height:48px;font-size:16px;box-shadow:none}
+
+@media (min-width:900px){
+  .wrap{padding:0 32px 56px}
+  .brand{padding-top:28px;font-size:17px}
+  .hero{padding-top:56px;gap:18px}
+  .video{margin-top:36px}
+  .cta-block{margin-top:28px}
+  .btn{min-height:64px;font-size:20px}
+  .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;margin-top:80px;align-items:start}
+  .right{gap:40px}
+  .gets{padding:6px 24px}
+  .get{padding:20px 0}
+  .get b{font-size:17px}
+  .get p{font-size:15px}
+  .step b{font-size:17px}
+  .step p{font-size:15px}
+  .fit{padding:22px 24px}
+  .bottom{margin-top:72px}
+}
+@media (max-width:360px){
+  .wrap{padding:0 16px 40px}
+  .btn{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn,.sticky,.sticky.show{transition:none}
+}
+</style>
+
+<!-- Meta Pixel and payment link: set PIXEL_ID and PAY_URL in PAGE_CONFIG below. -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1824324015374445');
-fbq('track', 'PageView');
-// Safe wrapper so a blocked pixel never breaks the funnel
-window.metaTrack = function(kind, name, params){
-  try { if (window.fbq) window.fbq(kind, name, params || {}); } catch (e) {}
+window.PAGE_CONFIG = {
+  PIXEL_ID: '1824324015374445',
+  PAY_URL: 'https://rzp.io/rzp/bymandeep'
 };
+(function(){
+  var id = window.PAGE_CONFIG.PIXEL_ID;
+  if (!id || id === 'YOUR_PIXEL_ID') return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src='https://connect.facebook.net/en_US/fbevents.js';s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script');
+  var pvId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+    : 'pv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+  window.PAGEVIEW_EVENT_ID = pvId;
+  fbq('init', id);
+  fbq('track', 'PageView', {}, { eventID: pvId });
+})();
 </script>
-
-<!-- ============================================================
-     TRACKING: dataLayer kept intact. Events pushed by this page:
-       - quiz_button_click   (variant: 'pages')
-       - form_submission_vsl (variant: 'pages')
-     GTM loader is disabled for now because container GTM-W95RB6L
-     contains Meta tags for the other pixel. If you re-enable it, remove
-     the direct metaTrack() calls or the events will be counted twice.
-     ============================================================ -->
-<script>window.dataLayer = window.dataLayer || [];</script>
-<!--
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W95RB6L');</script>
--->
-
-<style>
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: #fafafa;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ---------- HERO (Part A) ---------- */
-  .vsl-hero-top, .vsl-hero-top * { box-sizing: border-box; }
-  .vsl-hero-top {
-    width: 100%;
-    background: #fafafa;
-    line-height: 1.35;
-    padding: 26px 20px 22px;
-    text-align: center;
-  }
-  .vsl-hero-top .inner { width: 100%; max-width: 460px; margin: 0 auto; }
-  .vsl-hero-top .eyebrow {
-    display: block; font-size: 11px; font-weight: 700; color: #4b3ff0;
-    letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 10px;
-  }
-  .vsl-hero-top h1 {
-    font-size: 20px; line-height: 1.3; font-weight: 800; letter-spacing: -0.01em;
-    color: #0a0a0a; margin: 0 0 8px;
-  }
-  .vsl-hero-top .agitate { font-size: 14px; line-height: 1.45; color: #333; max-width: 400px; margin: 0 auto; }
-  .vsl-hero-top .agitate b { color: #0a0a0a; font-weight: 700; }
-  @media (min-width: 640px) {
-    .vsl-hero-top { padding: 34px 24px 14px; }
-    .vsl-hero-top .inner { max-width: 780px; }
-    .vsl-hero-top h1 { font-size: 26px; margin-bottom: 10px; white-space: nowrap; }
-    .vsl-hero-top .agitate { font-size: 15px; max-width: 600px; white-space: nowrap; }
-    .vsl-hero-top .eyebrow { font-size: 11.5px; margin-bottom: 12px; }
-  }
-  @media (min-width: 1024px) {
-    .vsl-hero-top { padding: 42px 24px 16px; }
-    .vsl-hero-top .inner { max-width: 900px; }
-    .vsl-hero-top h1 { font-size: 32px; }
-  }
-  @media (min-width: 640px) and (max-width: 820px) {
-    .vsl-hero-top h1 { white-space: normal; font-size: 23px; }
-  }
-
-  /* ---------- VIDEO ---------- */
-  .vsl-video { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 0 8px; }
-  /* The embed below brings its own 16:9 wrapper (inline style) */
-  @media (min-width: 901px) { .vsl-video > div { border-radius: 12px; overflow: hidden; } }
-
-  /* ---------- QUIZ WRAPPER ---------- */
-  .quiz-section { padding: 28px 16px 64px; }
-  /* Quiz stays hidden until the visitor clicks the button below the video */
-  .quiz-section.quiz-hidden { display: none; }
-  .quiz-section.quiz-fade { animation: quizIn 0.6s ease both; }
-  @keyframes quizIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-
-  /* ---------- CTA BUTTON ---------- */
-  .cta-section { padding: 22px 16px 36px; text-align: center; }
-  .cta-section.cta-gone { display: none; }
-  .cta-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; max-width: 420px; padding: 18px 28px;
-    background: #4b3ff0; color: #fff; border: none; border-radius: 50px;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 18px; font-weight: 700; letter-spacing: 0.01em; cursor: pointer;
-    box-shadow: 0 6px 20px rgba(75,63,240,0.30);
-    transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-  }
-  .cta-btn:hover { background: #3d33cc; box-shadow: 0 8px 24px rgba(75,63,240,0.36); }
-  .cta-btn:active { transform: scale(0.98); }
-  .cta-btn:focus-visible { outline: 3px solid #1a1a1a; outline-offset: 3px; }
-  .cta-note { margin: 12px 0 0; font-size: 13px; color: #6b7280; font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-  @media (max-width: 480px) { .cta-btn { font-size: 17px; padding: 17px 22px; } }
-</style>
-
-<style>
-/* ---------- QUIZ FORM (unchanged from WordPress embed) ---------- */
-#acf-wrap, #acf-wrap * { box-sizing: border-box; margin: 0; }
-
-#acf-wrap {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #ffffff;
-  color: #1a2332;
-  width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(15,23,42,0.06);
-}
-#acf-powered { position: absolute; top: 14px; right: 18px; font-size: 10px; color: #c7cbd3; z-index: 6; }
-#acf-powered strong { color: #9aa1ad; }
-
-#acf-bar {
-  position: absolute; top: 20px; left: 32px; right: 120px;
-  display: flex; align-items: center; gap: 6px; z-index: 5; height: 8px;
-}
-.acf-seg { height: 8px; border-radius: 4px; background: #e5e7eb; flex: 1 1 0; transition: background 0.3s ease; }
-.acf-seg.done, .acf-seg.active { background: #4b3ff0; }
-
-#acf-stage { position: relative; overflow: hidden; }
-
-.acf-slide {
-  width: 100%;
-  padding: 52px 40px 36px;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-  min-height: 0;
-  visibility: hidden; opacity: 0;
-  position: absolute; top: 0; left: 0; right: 0;
-  pointer-events: none;
-  transition: opacity 0.42s cubic-bezier(.4,0,.2,1), transform 0.42s cubic-bezier(.4,0,.2,1);
-  transform: translateY(28px);
-}
-.acf-slide.acf-active { visibility: visible; opacity: 1; position: relative; pointer-events: all; transform: translateY(0); }
-.acf-slide.acf-exit {
-  visibility: visible; opacity: 0; position: absolute; top: 0; left: 0; right: 0;
-  pointer-events: none; transform: translateY(-28px);
-  transition: opacity 0.32s cubic-bezier(.4,0,.2,1), transform 0.32s cubic-bezier(.4,0,.2,1);
-}
-
-.acf-box { width: 100%; max-width: 580px; margin: 0 auto; }
-
-.acf-q { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-.acf-num { display: none; }
-.acf-qtxt { font-size: clamp(22px, 3vw, 30px); font-weight: 700; line-height: 1.35; color: #1a2332; }
-.acf-qtxt sup { color: #4b3ff0; font-size: 0.6em; }
-
-.acf-opts { display: flex; flex-direction: column; gap: 14px; margin-bottom: 8px; }
-.acf-opt {
-  display: flex; align-items: center; gap: 16px;
-  padding: 26px 28px; background: #f6f6f6; border: 1.5px solid #e3e3e3; border-radius: 50px;
-  cursor: pointer; font-size: 18px; color: #1a2332; text-align: left; font-family: inherit; line-height: 1.4;
-  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; width: 100%;
-}
-.acf-opt:hover { background: #f8f7ff; border-color: #4b3ff0; box-shadow: 0 2px 8px rgba(75,63,240,0.08); }
-.acf-opt.acf-sel { background: #4b3ff0; border-color: #4b3ff0; color: #fff; box-shadow: 0 2px 12px rgba(75,63,240,0.28); }
-.acf-ltr { display: none; }
-
-.acf-inp-wrap { margin-bottom: 28px; }
-.acf-inp {
-  width: 100%; border: none; border-bottom: 2px solid #d0cdc7; background: transparent;
-  padding: 12px 0; font-size: 20px; color: #1a1a1a; outline: none; font-family: inherit; transition: border-color 0.2s;
-}
-.acf-inp::placeholder { color: #c7cbd3; }
-.acf-inp:focus { border-bottom-color: #4b3ff0; }
-
-.acf-fields { display: flex; flex-direction: column; gap: 32px; margin-bottom: 28px; }
-.acf-flabel { display: block; font-size: 11px; font-weight: 600; color: #9aa1ad; margin-bottom: 8px; letter-spacing: 0.07em; text-transform: uppercase; }
-.acf-finp {
-  width: 100%; border: none; border-bottom: 2px solid #d0cdc7; background: transparent; padding: 10px 0;
-  font-size: 18px; color: #1a1a1a; outline: none; font-family: inherit; transition: border-color 0.2s;
-}
-.acf-finp::placeholder { color: #c7cbd3; }
-.acf-finp:focus { border-bottom-color: #4b3ff0; }
-.acf-phone-row { display: flex; align-items: flex-end; gap: 12px; }
-.acf-cc { border-bottom: 2px solid #d0cdc7; padding: 10px 0; font-size: 18px; white-space: nowrap; flex-shrink: 0; color: #1a1a1a; }
-
-.acf-btn {
-  display: inline-flex; align-items: center; gap: 10px; padding: 13px 28px; background: #1a1a1a; color: #fff;
-  border: none; border-radius: 8px; font-size: 15px; font-weight: 500; font-family: inherit; cursor: pointer;
-  transition: background 0.15s, transform 0.1s, box-shadow 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-.acf-btn:hover { background: #333; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
-.acf-btn:active { transform: scale(0.98); }
-
-.acf-err { font-size: 13px; color: #dc2626; margin-top: 10px; min-height: 18px; }
-.acf-hint { font-size: 12px; color: #c7cbd3; margin-top: 12px; }
-.acf-hint kbd { display: inline-block; padding: 2px 7px; background: #eceef1; border-radius: 4px; font-size: 11px; font-family: inherit; color: #9aa1ad; }
-
-#acf-bottom { display: flex; align-items: stretch; justify-content: space-between; gap: 0; padding: 0; background: #dcdde3; }
-.acf-nbtn {
-  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-  font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; transition: background 0.15s;
-}
-.acf-nbtn:disabled { opacity: 0.35; cursor: default; }
-#acf-prev { background: transparent; color: #1a2332; padding: 20px 24px; }
-#acf-prev:hover:not(:disabled) { background: rgba(17,24,39,0.06); }
-#acf-next { background: #4b3ff0; color: #fff; padding: 20px 40px; min-width: 150px; border-radius: 0 0 22px 0; }
-#acf-next:hover:not(:disabled) { background: #3d33cc; }
-
-.acf-slide .acf-btn, .acf-slide .acf-hint { display: none; }
-
-.acf-cal-slide { padding: 48px 0 0; justify-content: flex-start; min-height: unset; }
-.acf-cal-head { padding: 0 40px 24px; max-width: 580px; width: 100%; margin: 0 auto; }
-.acf-cal-clip { width: 100%; position: relative; height: 650px; }
-.acf-cal-cover { position: absolute; top: 0; left: 0; right: 0; height: 200px; background: #fff; z-index: 2; pointer-events: none; }
-.acf-cal-frame { width: 100%; height: 100%; border: none; display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
-
-.acf-center { justify-content: center; min-height: 380px; }
-.acf-disq { text-align: center; padding: 40px 20px; }
-.acf-disq-e { font-size: 44px; margin-bottom: 20px; }
-.acf-disq-h { font-size: 22px; font-weight: 700; color: #1a2332; margin-bottom: 12px; }
-.acf-disq-p { font-size: 15px; color: #6b7280; line-height: 1.7; max-width: 400px; margin: 0 auto 24px; }
-
-#acf-sending {
-  display: none; position: absolute; inset: 0; background: rgba(255,255,255,0.92); z-index: 20;
-  align-items: center; justify-content: center; gap: 12px; font-size: 14px; color: #9aa1ad;
-}
-#acf-sending.on { display: flex; }
-.acf-spin { width: 18px; height: 18px; border: 2px solid #e5e7eb; border-top-color: #4b3ff0; border-radius: 50%; animation: spin .7s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-@media (max-width: 768px) {
-  .acf-slide { padding: 32px 24px 28px; min-height: 0; }
-  .acf-cal-head { padding: 0 24px 20px; }
-  .acf-cal-clip { height: 580px; }
-  .acf-qtxt { font-size: 18px; }
-  .acf-opt { font-size: 14px; padding: 13px 16px; gap: 14px; }
-  .acf-btn { padding: 12px 24px; }
-}
-@media (max-width: 480px) {
-  .acf-slide { padding: 28px 18px 24px; min-height: 0; }
-  .acf-cal-clip { height: 520px; }
-  .acf-qtxt { font-size: 17px; }
-  .acf-q { gap: 12px; margin-bottom: 28px; }
-  .acf-opts { gap: 10px; }
-}
-</style>
 </head>
-
 <body>
 
-<!-- Google Tag Manager (noscript) disabled with the loader above
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W95RB6L"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
--->
+<div class="wrap">
 
-<!-- ============ PART A: HERO ============ -->
-<section class="vsl-hero-top">
-  <div class="inner">
-    <span class="eyebrow">D2C brands · ₹3L+/month ad spend</span>
-    <h1>Why did growth stop — and what's it costing you?</h1>
-    <div class="agitate">Most founders never get a straight answer. They just <b>guess and hope</b>.</div>
+  <div class="brand">AdComp<span> Digital Studio</span></div>
+
+  <header class="hero">
+    <div class="eyebrow">SHOPIFY &amp; WOOCOMMERCE · RUNNING META ADS</div>
+    <h1>Meta says 10 sales. Your store says 6. Why?</h1>
+    <p class="sub">A broken pixel quietly wastes your ad budget. <strong>Find out where the data is leaking.</strong></p>
+  </header>
+
+  <div class="video" id="video">
+    <iframe src="https://iframe.mediadelivery.net/embed/659110/35720c3b-6429-4bf1-abb8-cce8bccdad8f?autoplay=false&loop=false&muted=false&preload=true&responsive=true" title="Pixel clarity video" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
   </div>
-</section>
 
-<!-- ============ VIDEO ============ -->
-<section class="vsl-video">
-<div style="position:relative;aspect-ratio:16/9;">
-      <iframe
-            loading="lazy" title="Gumlet video player"
-            src="https://play.gumlet.io/embed/6ab14d1e0dbee56acc33efbb?background=false&autoplay=false&loop=false&disable_player_controls=false"
-            style="border:none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
-          referrerpolicy="origin"
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;clipboard-write;">
-          </iframe>
-    </div>
-</section>
-
-<!-- ============ CTA (reveals the quiz) ============ -->
-<section class="cta-section" id="cta-section">
-  <button type="button" class="cta-btn" id="cta-btn" aria-controls="quiz-section">See If You Qualify <span aria-hidden="true">→</span></button>
-  <p class="cta-note">7 quick questions · takes about 60 seconds</p>
-  <noscript><style>.cta-section{display:none!important}</style></noscript>
-</section>
-
-<!-- ============ QUIZ ============ -->
-<section class="quiz-section quiz-hidden" id="quiz-section">
-<noscript><style>.quiz-section.quiz-hidden{display:block!important}</style></noscript>
-<div id="acf-wrap">
-  <div id="acf-bar"></div>
-  <div id="acf-sending"><div class="acf-spin"></div><span>Saving your details…</span></div>
-
-  <div id="acf-stage">
-
-    <!-- Q1 Contact -->
-    <div class="acf-slide acf-active" data-i="0">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">1</div><div class="acf-qtxt">How do we reach you?<sup>*</sup></div></div>
-        <div class="acf-fields">
-          <div>
-            <label class="acf-flabel">First name *</label>
-            <input type="text" class="acf-finp" id="ai-name" placeholder="Jane" oninput="acfClr(0)" />
-          </div>
-          <div>
-            <label class="acf-flabel">Phone number *</label>
-            <div class="acf-phone-row">
-              <div class="acf-cc">🇮🇳 +91</div>
-              <input type="tel" class="acf-finp" id="ai-phone" placeholder="98765 43210" oninput="acfClr(0)" style="flex:1" />
-            </div>
-          </div>
-          <div>
-            <label class="acf-flabel">Email *</label>
-            <input type="email" class="acf-finp" id="ai-email" placeholder="name@example.com" oninput="acfClr(0)" onkeydown="if(event.key==='Enter'){event.preventDefault();acfNext()}" />
-          </div>
-        </div>
-        <div class="acf-err" id="ae-0"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q2 -->
-    <div class="acf-slide" data-i="1">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">2</div><div class="acf-qtxt">What platform do you primarily sell on?<sup>*</sup></div></div>
-        <div class="acf-opts" id="ac-1">
-          <button class="acf-opt" data-v="Shopify / WordPress" onclick="acfPick(1,this)"><span class="acf-ltr">A</span>Shopify / WordPress</button>
-          <button class="acf-opt" data-v="Amazon / Marketplaces" onclick="acfPick(1,this)"><span class="acf-ltr">B</span>Amazon / Marketplaces</button>
-          <button class="acf-opt" data-v="Blinkit / Instamart / Zepto" onclick="acfPick(1,this)"><span class="acf-ltr">C</span>Blinkit / Instamart / Zepto</button>
-          <button class="acf-opt" data-v="Multiple" onclick="acfPick(1,this)"><span class="acf-ltr">D</span>Multiple</button>
-        </div>
-        <div class="acf-err" id="ae-1"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q3 -->
-    <div class="acf-slide" data-i="2">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">3</div><div class="acf-qtxt">What is your website / store URL?<sup>*</sup></div></div>
-        <div class="acf-inp-wrap">
-          <input type="text" class="acf-inp" id="ai-2" placeholder="adcomp.xyz" oninput="acfClr(2)" onkeydown="if(event.key==='Enter'){event.preventDefault();acfNext()}" />
-        </div>
-        <div class="acf-err" id="ae-2"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q4 -->
-    <div class="acf-slide" data-i="3">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">4</div><div class="acf-qtxt">What's your current ad spend?<sup>*</sup></div></div>
-        <div class="acf-opts" id="ac-3">
-          <button class="acf-opt" data-v="Not started" onclick="acfPick(3,this)"><span class="acf-ltr">A</span>Not started advertising yet</button>
-          <button class="acf-opt" data-v="1K-3K/day" onclick="acfPick(3,this)"><span class="acf-ltr">B</span>₹1K to ₹3K/Day</button>
-          <button class="acf-opt" data-v="3K-5K/day" onclick="acfPick(3,this)"><span class="acf-ltr">C</span>₹3K to ₹5K/Day</button>
-          <button class="acf-opt" data-v="5K+/day" onclick="acfPick(3,this)"><span class="acf-ltr">D</span>₹5K+/Day</button>
-        </div>
-        <div class="acf-err" id="ae-3"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q5 -->
-    <div class="acf-slide" data-i="4">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">5</div><div class="acf-qtxt">What's your biggest challenge right now?<sup>*</sup></div></div>
-        <div class="acf-opts" id="ac-4">
-          <button class="acf-opt" data-v="Scaling ad spend without killing ROAS" onclick="acfPick(4,this)"><span class="acf-ltr">A</span>Scaling ad spend without killing ROAS</button>
-          <button class="acf-opt" data-v="Plateaued revenue" onclick="acfPick(4,this)"><span class="acf-ltr">B</span>Plateaued revenue</button>
-          <button class="acf-opt" data-v="Poor margins despite growth" onclick="acfPick(4,this)"><span class="acf-ltr">C</span>Poor margins despite growth</button>
-          <button class="acf-opt" data-v="Don't have a clear growth system" onclick="acfPick(4,this)"><span class="acf-ltr">D</span>Don't have a clear growth system</button>
-        </div>
-        <div class="acf-err" id="ae-4"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q6 -->
-    <div class="acf-slide" data-i="5">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">6</div><div class="acf-qtxt">If our services can help solve your problem, how soon do you want to start?<sup>*</sup></div></div>
-        <div class="acf-opts" id="ac-5">
-          <button class="acf-opt" data-v="Immediately" onclick="acfPick(5,this)"><span class="acf-ltr">A</span>Immediately</button>
-          <button class="acf-opt" data-v="Within 30 Days" onclick="acfPick(5,this)"><span class="acf-ltr">B</span>Within 30 Days</button>
-          <button class="acf-opt" data-v="Just Exploring" onclick="acfPick(5,this)"><span class="acf-ltr">C</span>Just Exploring</button>
-        </div>
-        <div class="acf-err" id="ae-5"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q7 -->
-    <div class="acf-slide" data-i="6">
-      <div class="acf-box">
-        <div class="acf-q"><div class="acf-num">7</div><div class="acf-qtxt">If we're a fit, are you the person who makes the final call on hiring a growth partner?<sup>*</sup></div></div>
-        <div class="acf-opts" id="ac-6">
-          <button class="acf-opt" data-v="Yes — my decision" onclick="acfPick(6,this)"><span class="acf-ltr">A</span>Yes, it's my decision</button>
-          <button class="acf-opt" data-v="Part of the decision" onclick="acfPick(6,this)"><span class="acf-ltr">B</span>I'm part of the decision, not the only one</button>
-          <button class="acf-opt" data-v="Researching for someone else" onclick="acfPick(6,this)"><span class="acf-ltr">C</span>I'm researching for someone else</button>
-        </div>
-        <div class="acf-err" id="ae-6"></div>
-        <button class="acf-btn" onclick="acfNext()">OK <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg></button>
-        <div class="acf-hint">press <kbd>Enter ↵</kbd></div>
-      </div>
-    </div>
-
-    <!-- Q8 Cal -->
-    <div class="acf-slide acf-cal-slide" data-i="7">
-      <div class="acf-cal-head">
-        <div class="acf-q"><div class="acf-num">8</div><div class="acf-qtxt">Please book a slot for your Google Meet call</div></div>
-      </div>
-      <div class="acf-cal-clip">
-        <div class="acf-cal-cover" id="acf-cal-cover"></div>
-        <iframe class="acf-cal-frame" id="acf-cal" src="" title="Book a discovery call" loading="lazy" onload="window.acfCalLoaded && window.acfCalLoaded()"></iframe>
-      </div>
-    </div>
-
-    <!-- Submitted (no ads yet) -->
-    <div class="acf-slide acf-center" data-i="submitted">
-      <div class="acf-box acf-disq">
-        <div class="acf-disq-e">🙌</div>
-        <div class="acf-disq-h">Thanks for submitting your details!</div>
-        <div class="acf-disq-p">We've got everything we need. Our team will review your answers and get back to you shortly.</div>
-      </div>
-    </div>
-
-    <!-- Booked -->
-    <div class="acf-slide acf-center" data-i="booked">
-      <div class="acf-box acf-disq">
-        <div class="acf-disq-e">🎉</div>
-        <div class="acf-disq-h">You're booked in!</div>
-        <div class="acf-disq-p">Your slot is confirmed. Check your email for the Google Meet link — we'll see you soon!</div>
-      </div>
-    </div>
-
-  </div><!-- /stage -->
-
-  <div id="acf-bottom">
-    <button class="acf-nbtn" id="acf-prev" onclick="acfPrev()" disabled>
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="13" y1="8" x2="3" y2="8"/><polyline points="7,4 3,8 7,12"/></svg>
-      PREV
-    </button>
-    <button class="acf-nbtn" id="acf-next" onclick="acfNext()">
-      NEXT
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
-    </button>
+  <div class="cta-block" id="hero-cta">
+    <a class="btn" href="#" data-pay data-loc="hero">Book my ₹99 pixel session
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+    </a>
+    <div class="note">20-minute screen-share · you pick the slot after paying</div>
   </div>
-  <span id="acf-powered">Built with <strong>AdComp</strong></span>
+
+  <div class="cols">
+    <section>
+      <h2>What you get in the session</h2>
+      <div class="card gets">
+        <div class="get">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></div>
+          <div><b>Pixel and event check</b><p>Purchase, add-to-cart and checkout events tested on your live store.</p></div>
+        </div>
+        <div class="get">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.2 6 10.5A6 6 0 0 1 6 13.5C6 9.2 12 3 12 3z"></path></svg></div>
+          <div><b>The mismatch, explained</b><p>Why Meta and your store report different sales, in plain words.</p></div>
+        </div>
+        <div class="get">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11"></path><path d="M9 12h11"></path><path d="M9 18h11"></path><path d="M4 6h.01"></path><path d="M4 12h.01"></path><path d="M4 18h.01"></path></svg></div>
+          <div><b>CAPI and duplicate-event status</b><p>Whether server events are being sent, and whether sales are counted twice.</p></div>
+        </div>
+        <div class="get">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"></rect><path d="M4 8l8 6 8-6"></path></svg></div>
+          <div><b>A fix list in priority order</b><p>What to repair first, in a written recap within 24 hours.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="right">
+      <section>
+        <h2>How it works</h2>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div><b>Pay ₹99 securely</b><p>A Razorpay payment page, takes a minute.</p></div></div>
+          <div class="step"><div class="num">2</div><div><b>Book a slot for your pixel session</b><p>Pick a time that suits you. We check your pixel and events on a 20-minute screen-share.</p></div></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Is this for you?</h2>
+        <div class="card fit">
+          <div>
+            <h3 class="yes">GOOD FIT</h3>
+            <ul class="yes-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Store on Shopify or WooCommerce</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Running Meta ads with the pixel installed</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Meta's sales numbers don't match your orders</li>
+            </ul>
+          </div>
+          <hr>
+          <div>
+            <h3 class="no">PROBABLY NOT</h3>
+            <ul class="no-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>You are not running Meta ads yet</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="refund">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      <div><b>Not useful? Get your ₹99 back.</b><p>If the session isn't worth ₹99 to you, tell me and I'll refund it.</p></div>
+    </div>
+
+    <div class="cta-block">
+      <a class="btn" href="#" data-pay data-loc="bottom">Book my ₹99 pixel session
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </a>
+      <div class="note">Secure payment via Razorpay</div>
+    </div>
+  </div>
+
+  <footer>© 2026 AdComp Digital Studio</footer>
+
 </div>
-</section>
+
+<div class="sticky" id="sticky">
+  <div class="sticky-in">
+    <div class="price"><b>₹99</b><span>20-min pixel session</span></div>
+    <a class="btn" href="#" data-pay data-loc="sticky">Book now</a>
+  </div>
+</div>
 
 <script>
 (function(){
-  var SHEET_URL  = 'https://script.google.com/macros/s/AKfycbxFPiDq1b2GQKQbbOe0qa1LHHesMmbsLOCNg39QZ40OBA05EuM0rkdAprLvtmdksfA/exec';
-  var PABBLY_URL = 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NjYwNTZkMDYzNjA0M2Q1MjZlNTUzMyI_3D_pc/IjU3NjcwNTY5MDYzMTA0MzE1MjZlNTUzMDUxMzUi_pc';
-  var CAL        = 'https://calendly.com/mandeepsingh97-v33k/30min';
-  var VARIANT    = 'pages';   // identifies this hosting version in every lead
-  var TOTAL      = 7;
-  var cur        = 0;
-  var ans        = {};
-  var animating  = false;
+  var cfg = window.PAGE_CONFIG || {};
+  var links = document.querySelectorAll('[data-pay]');
+  for (var i = 0; i < links.length; i++) links[i].setAttribute('href', cfg.PAY_URL);
 
-  // ---- Tracking: UTMs, click ids, Meta cookies, variant ----
-  function getCookie(n){
-    try{
-      var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)'));
-      return m ? decodeURIComponent(m[1]) : '';
-    }catch(e){ return ''; }
-  }
-  function getTracking(){
-    var q = new URLSearchParams(window.location.search);
-    var t = {};
-    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){
-      var v = q.get(k);
-      if(v){ try{ sessionStorage.setItem('acf_'+k, v); }catch(e){} }
-      var s = '';
-      try{ s = sessionStorage.getItem('acf_'+k) || ''; }catch(e){}
-      t[k] = v || s || '';
-    });
-    t.fbp = getCookie('_fbp');
-    t.fbc = getCookie('_fbc');
-    t.page_url = window.location.href;
-    t.variant = VARIANT;
-    return t;
-  }
-  function withTracking(p){
-    var t = getTracking();
-    for(var k in t){ p[k] = t[k]; }
-    return p;
-  }
-  // Store UTMs as soon as the page loads, so they survive any URL change
-  getTracking();
-
-  function slide(i){ return document.querySelector('.acf-slide[data-i="'+i+'"]'); }
-
-  function go(ni){
-    if(animating) return;
-    var c = slide(cur);
-    var n = slide(ni);
-    if(!n) return;
-    animating = true;
-
-    c.classList.add('acf-exit');
-    c.classList.remove('acf-active');
-    setTimeout(function(){ c.classList.remove('acf-exit'); }, 350);
-
-    setTimeout(function(){
-      n.classList.add('acf-active');
-      document.getElementById('acf-stage').style.height = n.offsetHeight + 'px';
-      cur = ni;
-      animating = false;
-      setTimeout(function(){
-        var inp = n.querySelector('input');
-        if(inp) inp.focus();
-        setTimeout(function(){
-          document.getElementById('acf-stage').style.height = n.offsetHeight + 'px';
-        }, 100);
-      }, 80);
-    }, 160);
-
-    if(ni === 7){
-      var iframe = document.getElementById('acf-cal');
-      if(!iframe.src || iframe.src === '' || iframe.src === window.location.href){
-        var p = new URLSearchParams();
-        if(ans.name)  p.set('name',  ans.name);
-        if(ans.email) p.set('email', ans.email);
-        p.set('embed_domain', window.location.hostname);
-        p.set('embed_type', 'Inline');
-        p.set('hide_gdpr_banner', '1');
-        iframe.src = CAL + '?' + p.toString();
-      }
-    }
-
-    document.getElementById('acf-prev').disabled = (ni===0||ni==='submitted'||ni==='booked');
-    document.getElementById('acf-next').disabled = (ni===7||ni==='submitted'||ni==='booked');
-
-    updateSteps(ni);
-  }
-
-  function buildSteps(){
-    var bar = document.getElementById('acf-bar');
-    bar.innerHTML = '';
-    for(var s=0; s<TOTAL; s++){
-      var seg = document.createElement('div');
-      seg.className = 'acf-seg';
-      seg.setAttribute('data-seg', s);
-      bar.appendChild(seg);
+  // Show the sticky bar only when the top button is out of view.
+  var heroCta = document.getElementById('hero-cta');
+  var sticky = document.getElementById('sticky');
+  if (sticky) {
+    if ('IntersectionObserver' in window && heroCta) {
+      new IntersectionObserver(function(entries){
+        sticky.classList.toggle('show', !entries[0].isIntersecting);
+      }).observe(heroCta);
+    } else {
+      sticky.classList.add('show');
     }
   }
 
-  function updateSteps(ni){
-    var segs = document.querySelectorAll('.acf-seg');
-    var activeIdx = (typeof ni === 'number') ? ni : TOTAL;
-    segs.forEach(function(seg){
-      var s = parseInt(seg.getAttribute('data-seg'), 10);
-      seg.classList.remove('done','active');
-      if(s < activeIdx) seg.classList.add('done');
-      else if(s === activeIdx) seg.classList.add('active');
-    });
-  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('[data-pay]') : null;
+    if (!a) return;
+    var url = a.getAttribute('href');
+    var plain = !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button);
 
-  function normaliseUrl(v){
-    v = v.trim();
-    if(!v) return v;
-    if(!/^https?:\/\//i.test(v)) v = 'https://' + v;
-    return v;
-  }
+    if (url === '#') e.preventDefault();
 
-  function validate(i){
-    if(i===0){
-      var nm = (document.getElementById('ai-name').value||'').trim();
-      var ph = (document.getElementById('ai-phone').value||'').trim();
-      var em = (document.getElementById('ai-email').value||'').trim();
-      if(!nm) return 'Please enter your name.';
-      if(!ph||ph.length<7) return 'Please enter a valid phone number.';
-      if(!em||em.indexOf('@')<0) return 'Please enter a valid email.';
+    if (typeof window.fbq !== 'function') return;
+
+    try {
+      var eventID = 'bps_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      window.fbq('trackCustom', 'book_pixel_session', {
+        button_location: a.getAttribute('data-loc'),
+        offer: 'pixel_clarity',
+        value: 99,
+        currency: 'INR'
+      }, { eventID: eventID });
+    } catch (err) { return; }
+
+    // Give the pixel a moment to send before leaving for Razorpay.
+    if (plain && url && url !== '#') {
+      e.preventDefault();
+      setTimeout(function(){ window.location.href = url; }, 200);
     }
-    if([1,3,4,5,6].indexOf(i) > -1 && !ans[i]) return 'Please choose an option to continue.';
-    if(i===2){
-      var v = (document.getElementById('ai-2').value||'').trim();
-      if(!v) return 'Please enter your website URL.';
-    }
-    return null;
-  }
-
-  function collect(i){
-    if(i===0){
-      ans.name  = (document.getElementById('ai-name').value||'').trim();
-      ans.phone = '+91 '+(document.getElementById('ai-phone').value||'').trim();
-      ans.email = (document.getElementById('ai-email').value||'').trim();
-    }
-    if(i===2) ans[2] = normaliseUrl(document.getElementById('ai-2').value||'');
-  }
-
-  function showErr(i,m){ var e=document.getElementById('ae-'+i); if(e) e.textContent=m; }
-  window.acfClr = function(i){ var e=document.getElementById('ae-'+i); if(e) e.textContent=''; };
-
-  window.acfNext = function(){
-    if(animating) return;
-    var err = validate(cur);
-    if(err){ showErr(cur,err); return; }
-    acfClr(cur); collect(cur);
-    if(cur===0){
-      sendContact();
-      go(1);
-      return;
-    }
-    if(cur===6){
-      sendData();
-      if(ans[3]==='Not started'){ go('submitted'); return; }
-      go(7);
-      return;
-    }
-    if(typeof cur==='number' && cur<6) go(cur+1);
-  };
-
-  window.acfPrev = function(){
-    if(animating) return;
-    if(typeof cur==='number' && cur>0) go(cur-1);
-  };
-
-  window.acfPick = function(qi, btn){
-    var c = document.getElementById('ac-'+qi);
-    if(!c) return;
-    c.querySelectorAll('.acf-opt').forEach(function(b){ b.classList.remove('acf-sel'); });
-    btn.classList.add('acf-sel');
-    ans[qi] = btn.getAttribute('data-v');
-    acfClr(qi);
-    setTimeout(acfNext, 380);
-  };
-
-  document.addEventListener('keydown', function(e){
-    if(e.target.tagName==='INPUT') return;
-    if(e.key==='Enter') acfNext();
-    if(e.key==='ArrowUp') acfPrev();
-    if(e.key==='ArrowDown') acfNext();
-    var map={a:0,b:1,c:2,d:3};
-    var k=e.key.toLowerCase();
-    if(map[k]!==undefined && !e.metaKey && !e.ctrlKey){
-      var c2=document.getElementById('ac-'+cur);
-      if(c2){ var bs=c2.querySelectorAll('.acf-opt'); if(bs[map[k]]) acfPick(cur,bs[map[k]]); }
-    }
-  });
-
-  function sendContact(){
-    var payload = withTracking({
-      timestamp: new Date().toISOString(),
-      stage:     'contact_info',
-      name:      ans.name||'',
-      phone:     ans.phone||'',
-      email:     ans.email||''
-    });
-
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'form_submission_vsl', variant: VARIANT });
-    window.metaTrack && window.metaTrack('track', 'Lead');
-
-    fetch(SHEET_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    }).catch(function(e){ console.error('Sheet (contact):',e); });
-
-    fetch(PABBLY_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    }).catch(function(e){ console.error('Pabbly (contact):',e); });
-  }
-
-  function sendData(){
-    var payload = withTracking({
-      timestamp:      new Date().toISOString(),
-      platform:       ans[1]||'',
-      website:        ans[2]||'',
-      ad_budget:      ans[3]||'',
-      challenge:      ans[4]||'',
-      timeline:       ans[5]||'',
-      decision_maker: ans[6]||'',
-      name:           ans.name||'',
-      phone:          ans.phone||'',
-      email:          ans.email||''
-    });
-
-    var ov = document.getElementById('acf-sending');
-    ov.classList.add('on');
-    var hidden = false;
-    function hide(){ if(!hidden){ hidden = true; ov.classList.remove('on'); } }
-    var done = 0;
-    function finish(){ done++; if(done>=2) hide(); }
-    setTimeout(hide, 900);
-
-    fetch(SHEET_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    }).catch(function(e){ console.error('Sheet:',e); }).finally(finish);
-
-    fetch(PABBLY_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    }).catch(function(e){ console.error('Pabbly:',e); }).finally(finish);
-  }
-
-  window.acfCalLoaded = function(){
-    var cover = document.getElementById('acf-cal-cover');
-    if(!cover) return;
-    setTimeout(function(){
-      cover.style.transition = 'height 0.3s ease';
-      cover.style.height = '0px';
-    }, 800);
-  };
-
-  window.addEventListener('message', function(e){
-    if(!e.data) return;
-    var d = e.data;
-    var isBooked = (
-      d === 'booking_confirmed' ||
-      d.type === 'booking_confirmed' ||
-      d.type === 'cal:booking_confirmed' ||
-      d.event === 'calendly.event_scheduled' ||
-      d.type === '__cal__booking_successful' ||
-      (typeof d === 'string' && d.indexOf('booking') > -1 && d.indexOf('confirm') > -1)
-    );
-    if(isBooked && !window.__scheduleSent){
-      window.__scheduleSent = true;
-      window.metaTrack && window.metaTrack('track', 'Schedule');
-      go('booked');
-      // short delay so the browser pixel request is sent before the redirect
-      setTimeout(function(){
-        window.location.href = 'https://adcomp.xyz/cal-eu-confirmation/';
-      }, 500);
-    }
-  });
-
-  function lockHeight(){
-    var active = document.querySelector('.acf-slide.acf-active');
-    if(active){
-      document.getElementById('acf-stage').style.height = active.offsetHeight + 'px';
-    }
-  }
-  buildSteps();
-  updateSteps(0);
-  lockHeight();
-  window.addEventListener('resize', lockHeight);
-  window.addEventListener('load', lockHeight);
-
-})();
-</script>
-
-<script>
-// Clicking "See If You Qualify" hides the button and reveals the quiz.
-(function(){
-  var btn = document.getElementById('cta-btn');
-  if(!btn) return;
-  btn.addEventListener('click', function(){
-    var cta  = document.getElementById('cta-section');
-    var quiz = document.getElementById('quiz-section');
-    if(!quiz) return;
-    cta.classList.add('cta-gone');
-    quiz.classList.remove('quiz-hidden');
-    quiz.classList.add('quiz-fade');
-    // the quiz measures its height on load; re-measure now that it is visible
-    window.dispatchEvent(new Event('resize'));
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'quiz_button_click', variant: 'pages' });
-    window.metaTrack && window.metaTrack('trackCustom', 'quiz_button_click');
-    requestAnimationFrame(function(){
-      quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
   });
 })();
 </script>
-
 </body>
 </html>
