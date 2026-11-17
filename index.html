@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://vz-7e22ccfd-0a4.b-cdn.net" crossorigin>
+<link rel="preconnect" href="https://iframe.mediadelivery.net">
 <style>
 :root{
   --accent:#4F46E5;
@@ -99,6 +101,47 @@ footer{margin-top:36px;text-align:center;font-size:12.5px;color:#6B6B7B}
 .price span{font-size:12px;color:var(--muted)}
 .sticky .btn{flex:1;min-height:48px;font-size:16px;box-shadow:none}
 
+/* proof section */
+#proof{scroll-margin-top:16px;margin-top:48px}
+#proof .eyebrow{text-align:left}
+.p-stage{position:relative;width:100%;aspect-ratio:16/9;background:var(--ink);border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.p-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.p-poster{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;border:0;background:var(--ink);cursor:pointer;display:block}
+.p-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.p-play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--accent);box-shadow:0 12px 24px -8px rgba(79,70,229,.7)}
+.p-play:after{content:"";position:absolute;left:27px;top:21px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent #fff}
+.p-poster:focus-visible,.p-item:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.p-info{padding:2px 2px 0}
+.p-title{margin:0 0 8px;font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.25;color:var(--ink)}
+.p-result{display:inline-block;margin:0;font-size:12px;font-weight:700;color:var(--good);background:#E6F4F2;border:1px solid #B7DDD8;border-radius:999px;padding:4px 11px}
+.p-result:empty{display:none}
+.p-head{display:flex;justify-content:space-between;margin:14px 0 0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.p-list{display:grid;gap:8px}
+.p-item{display:flex;gap:12px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px;cursor:pointer;transition:border-color .15s}
+.p-item:hover{border-color:var(--muted)}
+.p-item[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.p-th{position:relative;flex:0 0 112px;aspect-ratio:16/9;background:var(--ink);border-radius:10px;overflow:hidden}
+.p-th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.p-meta{min-width:0;display:flex;flex-direction:column;gap:3px}
+.p-it{font-size:14px;font-weight:700;line-height:1.3;color:var(--ink)}
+.p-ir{font-size:12px;font-weight:600;color:var(--good)}
+.p-ir:empty{display:none}
+.p-now{display:none;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.p-item[aria-current="true"] .p-now{display:block}
+@media (min-width:900px){
+  .p-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .p-item{flex-direction:column;align-items:stretch}
+  .p-th{flex:none;width:100%}
+  .p-title{font-size:20px}
+}
+
+/* split sticky bar */
+.sticky .btn-alt{background:#fff;color:var(--accent);border:2px solid var(--accent);box-shadow:none;font-size:15px}
+.sticky .btn-alt:hover{background:var(--accent-soft);box-shadow:none}
+.sticky .btn-alt.hide{display:none}
+.p-poster,.p-item,.sticky .btn{touch-action:manipulation}
+@media (max-width:360px){.sticky-in{gap:8px}.sticky .btn{font-size:14px;padding:0 8px}.sticky .btn-alt{font-size:13px}.p-th{flex-basis:96px}}
+
 @media (min-width:900px){
   .wrap{padding:0 32px 56px}
   .brand{padding-top:28px;font-size:17px}
@@ -116,6 +159,7 @@ footer{margin-top:36px;text-align:center;font-size:12.5px;color:#6B6B7B}
   .step p{font-size:15px}
   .fit{padding:22px 24px}
   .bottom{margin-top:72px}
+  #proof{margin-top:72px}
 }
 @media (max-width:360px){
   .wrap{padding:0 16px 40px}
@@ -225,6 +269,19 @@ window.PAGE_CONFIG = {
     </div>
   </div>
 
+  <section id="proof">
+    <div class="eyebrow">REAL RESULTS</div>
+    <h2>Will it work for your store?</h2>
+    <p class="sub" style="margin:0;max-width:620px">Real stores, real fixes. Pick one and watch.</p>
+    <div class="p-stage" id="p-stage"></div>
+    <div class="p-info" aria-live="polite">
+      <h3 class="p-title" id="p-title"></h3>
+      <p class="p-result" id="p-result"></p>
+    </div>
+    <div class="p-head"><span>All case studies</span><span id="p-count"></span></div>
+    <div class="p-list" id="p-list"></div>
+  </section>
+
   <div class="bottom">
     <div class="refund">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
@@ -244,8 +301,8 @@ window.PAGE_CONFIG = {
 
 <div class="sticky" id="sticky">
   <div class="sticky-in">
-    <div class="price"><b>₹99</b><span>20-min pixel session</span></div>
-    <a class="btn" href="#" data-pay data-loc="sticky">Book now</a>
+    <a class="btn btn-alt" href="#proof" id="stickyProof">Will it work for me?</a>
+    <a class="btn" href="#" data-pay data-loc="sticky">Book now · ₹99</a>
   </div>
 </div>
 
@@ -294,6 +351,73 @@ window.PAGE_CONFIG = {
       setTimeout(function(){ window.location.href = url; }, 200);
     }
   });
+})();
+</script>
+
+<script>
+(function(){
+  /* ---- FILL THESE IN ---- */
+  var LIB = '659110';                      /* same Bunny library as /speed; the collection (986a837e-20b6-4193-86d2-06339abc1e17) is only a folder and isn't used in the embed */
+  var CDN = 'vz-7e22ccfd-0a4.b-cdn.net';
+  var VIDEOS = [
+    /* id = Bunny video GUID. thumb = thumbnail file name. result = green pill, e.g. 'Meta 10 → store 9' */
+    { id:'f716a432-ce72-4e78-bffe-63fb9eadc510', thumb:'thumbnail_6d92c374.jpg', title:'Case study 1', result:'' },
+    { id:'17080f4d-ddab-46e8-9981-0b8102aa0539', thumb:'thumbnail_872acafa.jpg', title:'Case study 2', result:'' },
+    { id:'531d7923-f212-4271-9993-1c6932558949', thumb:'thumbnail_868e00e9.jpg', title:'Case study 3', result:'' }
+  ];
+  /* ----------------------- */
+
+  function $(i){ return document.getElementById(i); }
+  function esc(t){ var d=document.createElement('div'); d.textContent=t==null?'':String(t); return d.innerHTML; }
+  var stage=$('p-stage'), list=$('p-list'), cur=-1;
+  if(!stage||!list||!VIDEOS.length) return;
+
+  function thumb(v){ return 'https://'+CDN+'/'+encodeURIComponent(v.id)+'/'+(v.thumb||'thumbnail.jpg'); }
+  var ERR="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.replace(/\\/[^\\/]+$/,'/thumbnail.jpg')}else{this.remove()}";
+
+  $('p-count').textContent = VIDEOS.length+(VIDEOS.length===1?' video':' videos');
+  list.innerHTML = VIDEOS.map(function(v,i){
+    return '<button type="button" class="p-item" data-i="'+i+'" aria-current="false">'+
+      '<span class="p-th"><img src="'+esc(thumb(v))+'" onerror="'+ERR+'" alt="" width="320" height="180" decoding="async" loading="lazy"></span>'+
+      '<span class="p-meta"><span class="p-it">'+esc(v.title)+'</span><span class="p-ir">'+esc(v.result)+'</span><span class="p-now">Now playing</span></span></button>';
+  }).join('');
+
+  function play(v){
+    var f=document.createElement('iframe');
+    f.src='https://iframe.mediadelivery.net/embed/'+encodeURIComponent(LIB)+'/'+encodeURIComponent(v.id)+'?autoplay=true&preload=true&responsive=true';
+    f.title=v.title;
+    f.setAttribute('allow','accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture');
+    f.setAttribute('allowfullscreen','');
+    stage.innerHTML=''; stage.appendChild(f);
+  }
+  function show(i,auto){
+    var v=VIDEOS[i]; if(!v) return; cur=i;
+    stage.innerHTML='<button type="button" class="p-poster" aria-label="Play: '+esc(v.title)+'"><img src="'+esc(thumb(v))+'" onerror="'+ERR+'" alt="" width="1280" height="720" decoding="async" loading="lazy"><span class="p-play"></span></button>';
+    $('p-title').textContent=v.title; $('p-result').textContent=v.result||'';
+    Array.prototype.forEach.call(list.children,function(b){ b.setAttribute('aria-current',String(+b.getAttribute('data-i')===i)); });
+    if(auto) play(v);
+  }
+  stage.addEventListener('click',function(e){ if(e.target.closest&&e.target.closest('.p-poster')) play(VIDEOS[cur]); });
+  list.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.p-item'):null; if(!b) return;
+    show(+b.getAttribute('data-i'),true);
+    var r=stage.getBoundingClientRect();
+    if(r.top<0||r.bottom>window.innerHeight) stage.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  show(0,false);
+
+  /* sticky "Will it work for me?" -> scroll to the section, hide it while the section is on screen */
+  var alt=$('stickyProof'), sec=$('proof');
+  if(alt&&sec){
+    alt.addEventListener('click',function(e){
+      e.preventDefault();
+      var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+      sec.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'});
+    });
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){ alt.classList.toggle('hide',en[0].isIntersecting); },{threshold:.15}).observe(sec);
+    }
+  }
 })();
 </script>
 </body>
