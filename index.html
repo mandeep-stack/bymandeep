@@ -179,10 +179,11 @@ footer{margin-top:36px;text-align:center;font-size:12.5px;color:#6B6B7B}
 }
 </style>
 
-<!-- Payment link and GA4: set in PAGE_CONFIG below. No Meta Pixel on this page. -->
+<!-- Meta Pixel, GA4 and payment link: set in PAGE_CONFIG below. -->
 <script>
 window.PAGE_CONFIG = {
   GA4_ID: 'G-L0JC76MK57',
+  PIXEL_ID: '1011839678013173',
   PAY_URL: 'https://rzp.io/rzp/bymandeep'
 };
 // GA4 (same property as the booking page)
@@ -197,6 +198,20 @@ window.PAGE_CONFIG = {
   window.gtag = function(){ window.dataLayer.push(arguments); };
   gtag('js', new Date());
   gtag('config', gid);
+})();
+(function(){
+  var id = window.PAGE_CONFIG.PIXEL_ID;
+  if (!id) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src='https://connect.facebook.net/en_US/fbevents.js';s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script');
+  var pvId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+    : 'pv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+  window.PAGEVIEW_EVENT_ID = pvId;
+  fbq('init', id);
+  fbq('track', 'PageView', {}, { eventID: pvId });
 })();
 </script>
 <!-- Microsoft Clarity -->
@@ -351,8 +366,27 @@ window.PAGE_CONFIG = {
     var a = e.target.closest ? e.target.closest('[data-pay]') : null;
     if (!a) return;
     var url = a.getAttribute('href');
+    var plain = !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button);
 
     if (url === '#') e.preventDefault();
+
+    if (typeof window.fbq !== 'function') return;
+
+    try {
+      var eventID = 'bps_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      window.fbq('trackCustom', 'book_pixel_session', {
+        button_location: a.getAttribute('data-loc'),
+        offer: 'pixel_clarity',
+        value: 99,
+        currency: 'INR'
+      }, { eventID: eventID });
+    } catch (err) { return; }
+
+    // Give the pixel a moment to send before leaving for Razorpay.
+    if (plain && url && url !== '#') {
+      e.preventDefault();
+      setTimeout(function(){ window.location.href = url; }, 200);
+    }
   });
 })();
 </script>
@@ -370,9 +404,10 @@ window.PAGE_CONFIG = {
   ];
   /* ----------------------- */
 
-  /* tracking: GA4 event */
+  /* tracking: GA4 + Meta custom event */
   function track(name,params){
     try{ if(typeof window.gtag==='function') window.gtag('event',name,params); }catch(e){}
+    try{ if(typeof window.fbq==='function') window.fbq('trackCustom',name,params); }catch(e){}
   }
   document.addEventListener('click',function(e){
     var a=e.target.closest?e.target.closest('[data-proof]'):null;
