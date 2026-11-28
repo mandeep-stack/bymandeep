@@ -366,8 +366,27 @@ window.PAGE_CONFIG = {
     var a = e.target.closest ? e.target.closest('[data-pay]') : null;
     if (!a) return;
     var url = a.getAttribute('href');
+    var plain = !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button);
 
     if (url === '#') e.preventDefault();
+
+    if (typeof window.fbq !== 'function') return;
+
+    try {
+      var eventID = 'bps_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      window.fbq('trackCustom', 'book_pixel_session', {
+        button_location: a.getAttribute('data-loc'),
+        offer: 'pixel_clarity',
+        value: 99,
+        currency: 'INR'
+      }, { eventID: eventID });
+    } catch (err) { return; }
+
+    // Give the pixel a moment to send before leaving for Razorpay.
+    if (plain && url && url !== '#') {
+      e.preventDefault();
+      setTimeout(function(){ window.location.href = url; }, 200);
+    }
   });
 })();
 </script>
@@ -385,9 +404,10 @@ window.PAGE_CONFIG = {
   ];
   /* ----------------------- */
 
-  /* tracking: GA4 event */
+  /* tracking: GA4 + Meta custom event */
   function track(name,params){
     try{ if(typeof window.gtag==='function') window.gtag('event',name,params); }catch(e){}
+    try{ if(typeof window.fbq==='function') window.fbq('trackCustom',name,params); }catch(e){}
   }
   document.addEventListener('click',function(e){
     var a=e.target.closest?e.target.closest('[data-proof]'):null;
